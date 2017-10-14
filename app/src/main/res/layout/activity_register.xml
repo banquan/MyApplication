@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30dp"
+    tools:context="lgj.example.com.biyesheji.ui.activity.LogininActivity">
+
+    <com.chaychan.viewlib.PowerfulEditText
+        android:id="@+id/et_createUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:hint="请输入新的用户名"
+        app:funcType="canClear"
+        />
+
+    <com.chaychan.viewlib.PowerfulEditText
+        android:id="@+id/et_createPsd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:hint="请输入密码"
+        android:inputType="textPassword"
+        app:funcType="canWatchPwd"
+        />
+
+    <com.chaychan.viewlib.PowerfulEditText
+        android:id="@+id/et_ensurePsd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:hint="再次确认密码"
+        android:inputType="textPassword"
+        app:funcType="canWatchPwd"
+        />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/radioGroup_register"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="30dp">
+
+            <RadioButton
+                android:id="@+id/radioBtn_stu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:textSize="18sp"
+                android:text="学生" />
+
+            <RadioButton
+                android:id="@+id/radioBtn_mgn"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="管理员" />
+
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/register_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/button_style"
+        android:fontFamily="微软雅黑"
+        android:text="注册"
+        android:textColor="#ffffff"
+        android:textSize="18sp"/>
+
+
+</LinearLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="recycler_view" type="id"/>
+    <item name="first_image_show" type="id"/>
+    <item name="photos_title" type="id"/>
+    <item name="photos_quantity" type="id"/>
+    <item name="btn_add_album" type="id"/>
+    <item name="swipe_refresh_layout" type="id"/>
+    <item name="ablum_name" type="id"/>
+    <item name="upload_pic" type="id"/>
+    <item name="show_pic" type="id"/>
+    <item name="one_pic_objectId" type="id"/>
+    <item name="one_pic_show" type="id"/>
+</resources>

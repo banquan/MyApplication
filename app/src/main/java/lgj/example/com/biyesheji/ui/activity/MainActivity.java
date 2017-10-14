@@ -1,12 +1,17 @@
 package lgj.example.com.biyesheji.ui.activity;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.widget.RadioGroup;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.v3.BmobUser;
 import lgj.example.com.biyesheji.R;
+import lgj.example.com.biyesheji.model.MyUser;
 import lgj.example.com.biyesheji.ui.fragment.FileFragment;
 import lgj.example.com.biyesheji.ui.fragment.MainFragment;
 import lgj.example.com.biyesheji.ui.fragment.PhotoFragment;
@@ -16,10 +21,32 @@ public class MainActivity extends BaseActivity {
 
     private RadioGroup mRadioGroup;
     private ViewPager mViewPager;
-
+    private String userName;
+    private Boolean isMgn;
+    //创建mainactivity的实例
+    public static MainActivity sMainActivity = null;
     @Override
     protected void initData() {
+        //获得mainactivity
+        sMainActivity=this;
+        BmobUser bmobUser = BmobUser.getCurrentUser();
+        //本地无bmob的数据跳到登录页面
+        if(bmobUser == null){
+            Intent i = new Intent(MainActivity.this, LogininActivity.class);
+            startActivity(i);
+            finish();
+        }
 
+        //接受从登陆页面成功的登陆的用户名并toast
+        if(bmobUser!=null){
+            userName = (String) MyUser.getObjectByKey("username");
+            isMgn = (Boolean) MyUser.getObjectByKey("isMgn");
+            if(isMgn==true){
+                showToast("登陆成功,欢迎管理员:"+userName);
+            }else{
+                showToast("登陆成功,欢迎学生:"+userName);
+            }
+        }
     }
 
     @Override

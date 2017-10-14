@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="lgj.example.com.biyesheji.ui.activity.WriteAnnounceActivity">
+
+    <com.chaychan.viewlib.PowerfulEditText
+        android:hint="标题："
+        app:funcType="canClear"
+        android:id="@+id/title_write_announce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.chaychan.viewlib.PowerfulEditText
+        android:id="@+id/content_write_announce"
+        android:hint="内容:"
+        app:funcType="canClear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_write_announce"
+        />
+
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_announce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:layout_margin="16dp"
+        android:src="@drawable/upload_announce"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+
+</RelativeLayout>
