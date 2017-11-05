@@ -11,4 +11,5 @@
     <item name="show_pic" type="id"/>
     <item name="one_pic_objectId" type="id"/>
     <item name="one_pic_show" type="id"/>
+    <item name="btn_upload" type="id"/>
 </resources>

@@ -12,6 +12,7 @@ import lgj.example.com.biyesheji.ui.fragment.PhotoViewFragment;
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
+
 public class OnePicActivity extends BaseActivity {
 
     private String[] imgUrl;

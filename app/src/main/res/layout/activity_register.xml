@@ -20,6 +20,16 @@
         />
 
     <com.chaychan.viewlib.PowerfulEditText
+        android:id="@+id/et_createStuName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:hint="请输入姓名"
+        app:funcType="canClear"
+        />
+
+
+    <com.chaychan.viewlib.PowerfulEditText
         android:id="@+id/et_createPsd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,7 +50,6 @@
         />
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,26 +57,26 @@
 
         <RadioGroup
             android:id="@+id/radioGroup_register"
-            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="30dp">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/radioBtn_stu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:textSize="18sp"
-                android:text="学生" />
+                android:text="学生"
+                android:textSize="18sp"/>
 
             <RadioButton
                 android:id="@+id/radioBtn_mgn"
-                android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="管理员" />
+                android:text="管理员"
+                android:textSize="18sp"/>
 
 
         </RadioGroup>

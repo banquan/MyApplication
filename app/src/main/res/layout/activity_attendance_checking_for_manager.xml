@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_attendance_checking_for_manager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="lgj.example.com.biyesheji.ui.activity.AttendanceCheckingForManagerActivity">
+
+
+    <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/class_swipRecycleView"
+        />
+
+    <ScrollView
+        android:visibility="gone"
+        android:id="@+id/show_fence"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#D999" >
+
+        <TextView
+            android:id="@+id/tv_fenceList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:visibility="gone" />
+    </ScrollView>
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_above="@id/show_fence"
+        class="com.amap.api.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <!--<com.amap.api.maps.MapView-->
+
+        <!--android:id="@+id/map"-->
+
+        <!--android:layout_width="match_parent"-->
+
+        <!--android:layout_height="match_parent"/>-->
+</LinearLayout>

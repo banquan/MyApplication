@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "lgj.example.com.biyesheji"
         minSdkVersion 16
@@ -34,20 +35,54 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     compile files('libs/commons-codec-1.9.jar')
     compile 'com.google.code.gson:gson:2.8.2'
-
-
     compile 'com.android.support:recyclerview-v7:25.0.1'
-
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'com.android.support:cardview-v7:25.2.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-
-
     //进度条
     compile 'com.daimajia.numberprogressbar:library:1.4@aar'
-
     compile 'com.github.chrisbanes:PhotoView:1.3.0'
-
     compile 'com.squareup.picasso:picasso:2.3.2'
+    compile 'com.jaredrummler:material-spinner:1.1.0'
+    compile 'com.weiwangcn.betterspinner:library-material:1.1.0'
+    compile 'me.zhouzhuo.zzexcelcreator:zz-excel-creator:1.0.0'
+    compile 'com.android.support:design:25.3.1'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile files('libs/AMap_Location_V3.6.1_20171012.jar')
+    compile 'com.prolificinteractive:material-calendarview:1.4.0'
+    compile 'com.google.zxing:core:3.2.1'
+    compile 'com.journeyapps:zxing-android-embedded:3.3.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile files('libs/tbs_sdk_thirdapp_v3.5.0.1004_43500_sharewithdownload_withoutGame_obfs_20170801_113025.jar')
+    compile 'pub.devrel:easypermissions:0.4.3'
+    compile 'fm.jiecao:jiecaovideoplayer:5.5'
+    compile 'com.henryblue.minimusicview:library:1.0.1'
+    compile 'com.white:progressview:1.0.1'
+    compile 'com.android.support:design:25.1.1'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    compile 'com.android.support:recyclerview-v7:25.0.1'
+    compile 'cn.bmob.android:bmob-sdk:3.5.0'
+    compile 'com.daimajia.numberprogressbar:library:1.4@aar'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.android.support:cardview-v7:25.2.0'
+    compile 'com.daimajia.numberprogressbar:library:1.4@aar'
+    compile 'pub.devrel:easypermissions:0.4.3'
+    compile 'com.github.chrisbanes:PhotoView:1.3.0'
+    compile 'com.squareup.picasso:picasso:2.3.2'
+    compile 'fm.jiecao:jiecaovideoplayer:5.5'
+    compile 'com.henryblue.minimusicview:library:1.0.1'
+    compile 'com.white:progressview:1.0.1'
+    compile 'com.yanzhenjie:recyclerview-swipe:1.1.3'
+    compile 'cn.qqtheme.framework:AndroidPicker:latest.integration'
+    compile 'org.json:json:20171018'
+    compile 'com.amap.api:3dmap:latest.integration'
+    compile 'com.tapadoo.android:alerter:2.0.1'
+    compile 'com.yarolegovich:lovely-dialog:1.0.7'
+    compile 'com.yanzhikaijky:PictureProgressbar:1.2.0'
 
+
+    //Optional compile for GCM (Google Cloud Messaging).
+    compile 'com.google.android.gms:play-services-gcm:9.4.0'
+    compile 'com.hyphenate:hyphenate-sdk:3.3.0'
 }

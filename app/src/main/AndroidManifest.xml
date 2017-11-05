@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="lgj.example.com.biyesheji">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
     <!-- 允许联网 -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <!-- 获取GSM（2g）、WCDMA（联通3g）等网络状态的信息 -->
@@ -15,15 +16,34 @@
     <!-- 允许读取手机状态 用于创建BmobInstallation -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+
+    <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <!-- 用于申请获取蓝牙信息进行室内定位 -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
     <application
+        android:name=".app.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".app.MyApplication"
-        >
-        <activity android:name=".ui.activity.MainActivity">
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/Notitle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -32,16 +52,75 @@
         </activity>
         <activity android:name=".ui.activity.BaseActivity">
         </activity>
-        <activity android:name=".ui.activity.AttendanceCheckingActivity">
+        <activity android:name=".ui.activity.AttendanceCheckingForStudentActivity">
         </activity>
-        <activity android:name=".ui.activity.LogininActivity"
-                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+            android:name=".ui.activity.LogininActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <activity android:name=".ui.activity.RegisterActivity"
-                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+            android:name=".ui.activity.RegisterActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity android:name=".ui.activity.WriteAnnounceActivity">
         </activity>
+
+        <service android:name="com.amap.api.location.APSService"/>
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="b2b544cc3a418e0cf405149fa2a2eda1">
+        </meta-data>
+
+        <activity android:name=".ui.activity.AttendanceCheckingForManagerActivity">
+        </activity>
+        <activity android:name=".ui.activity.AttendanceCheckingActivity">
+        </activity>
+        <activity android:name=".ui.activity.FaceSignedActivity">
+        </activity>
+        <activity android:name=".ui.activity.ShowActivity"/>
+        <activity android:name=".ui.activity.MyCaptureActivity"/>
+        <activity android:name=".ui.activity.ClassDetailActivity">
+        </activity>
+        <activity android:name=".ui.activity.ShowClassCodeActivity">
+        </activity>
+        <activity android:name=".ui.activity.ClassVoteActivity">
+        </activity>
+        <activity android:name=".ui.activity.OnePicActivity"/>
+        <activity android:name=".ui.activity.ShowPicActivity"/>
+        <activity android:name=".ui.activity.ViewDocumentActivity"/>
+        <activity android:name=".ui.activity.ViewMusicActivity"/>
+        <activity android:name=".ui.activity.ViewPictureActivity"/>
+        <activity android:name=".ui.activity.ViewOtherActivity"/>
+        <activity android:name=".ui.activity.ViewVideoActivity"/>
+        <activity android:name=".ui.activity.LeaveListActivity">
+        </activity>
+        <activity android:name=".ui.activity.AlbumActivity">
+        </activity>
+        <activity android:name=".ui.activity.VoteDetailActivity">
+        </activity>
+
+
+        <!-- 设置环信应用的AppKey -->
+        <meta-data android:name="EASEMOB_APPKEY"  android:value="1189170919178135#class" />
+        <!-- 声明SDK所需的service SDK核心功能-->
+        <service android:name="com.hyphenate.chat.EMChatService" android:exported="true"/>
+        <service android:name="com.hyphenate.chat.EMJobService"
+                 android:permission="android.permission.BIND_JOB_SERVICE"
+                 android:exported="true"
+            />
+        <!-- 声明SDK所需的receiver -->
+        <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+            <!-- 可选filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
 
     </application>
 

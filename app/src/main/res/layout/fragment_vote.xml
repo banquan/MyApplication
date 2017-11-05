@@ -30,8 +30,16 @@
             android:layout_marginLeft="100dp"
             android:text="发起投票"
             android:textSize="10sp"
-
+            android:id="@+id/tv_lanuch_vote"
             />
 
     </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/vote_recycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+\
+
 </LinearLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_view_document"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<lgj.example.com.biyesheji.tbs.SuperFileView2-->
+        <!--android:id="@+id/displayDocumentView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+    <!--</lgj.example.com.biyesheji.tbs.SuperFileView2>-->
+
+
+    <com.tencent.smtt.sdk.WebView
+        android:id="@+id/wv_office"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.tencent.smtt.sdk.WebView>
+
+</LinearLayout>

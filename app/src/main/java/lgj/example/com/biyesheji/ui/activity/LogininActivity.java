@@ -3,6 +3,7 @@ package lgj.example.com.biyesheji.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -10,11 +11,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chaychan.viewlib.PowerfulEditText;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 import lgj.example.com.biyesheji.R;
 import lgj.example.com.biyesheji.model.MyUser;
+import lgj.example.com.biyesheji.utils.ThreadUtils;
 
 
 public class LogininActivity extends AppCompatActivity {
@@ -56,6 +60,18 @@ public class LogininActivity extends AppCompatActivity {
         loginin_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+final String username = et_userName.getText().toString().trim();
+                final String psd = et_psd.getText().toString().trim();
+
+                ThreadUtils.runOnBackgroundThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        loginEasemob(username,psd);
+                    }
+                });
+
+
+
                 final MyUser bu2 = new MyUser();
                 bu2.setUsername(String.valueOf(et_userName.getText()));
                 bu2.setPassword(String.valueOf(et_psd.getText()));
@@ -88,6 +104,29 @@ public class LogininActivity extends AppCompatActivity {
                 Intent i = new Intent(LogininActivity.this, RegisterActivity.class);
                 startActivity(i);
                 finish();
+            }
+        });
+
+
+    }
+
+    private void loginEasemob(String userName,String password) {
+        EMClient.getInstance().login(userName,password,new EMCallBack() {//回调
+            @Override
+            public void onSuccess() {
+                EMClient.getInstance().groupManager().loadAllGroups();
+                EMClient.getInstance().chatManager().loadAllConversations();
+                Log.d("main", "登录聊天服务器成功！");
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+
+            }
+
+            @Override
+            public void onError(int code, String message) {
+                Log.d("main", "登录聊天服务器失败！");
             }
         });
     }

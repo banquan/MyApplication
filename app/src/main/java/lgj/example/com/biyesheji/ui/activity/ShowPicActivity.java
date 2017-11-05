@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.daimajia.numberprogressbar.NumberProgressBar;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +31,15 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
 import lgj.example.com.biyesheji.R;
 import lgj.example.com.biyesheji.adapter.ShowPicAdapter;
-import lgj.example.com.biyesheji.model.AllPicInfo;
-import lgj.example.com.biyesheji.model.ImageItemViewInfo;
-import lgj.example.com.biyesheji.presenter.ShowPicPresenter;
-import lgj.example.com.biyesheji.presenter.impl.ShowPicPresenterImpl;
-import lgj.example.com.biyesheji.view.ShowPicView;
+import lgj.example.com.biyesheji.event.EventWithPhotoFragment;
+import lgj.example.com.biyesheji.model.AlbumBean;
+import lgj.example.com.biyesheji.model.PicInAlbumBean;
+import lgj.example.com.biyesheji.presenter.PicInAlbumPresenter;
+import lgj.example.com.biyesheji.presenter.impl.PicInAlbumPresenterImpl;
+import lgj.example.com.biyesheji.view.PicInAlbumView;
 
-public class ShowPicActivity extends AppCompatActivity implements ShowPicView {
+
+public class ShowPicActivity extends AppCompatActivity implements PicInAlbumView {
     @BindView(R.id.ablum_name)
     TextView mAblumName;
     @BindView(R.id.upload_pic)
@@ -49,7 +53,7 @@ public class ShowPicActivity extends AppCompatActivity implements ShowPicView {
     private String objectId;
     private String title;
 
-    private ShowPicPresenter mShowPicPresenter;
+    private PicInAlbumPresenter mShowPicPresenter;
 
     protected static final int GET_HEAD_IMG = 1001;
     private static final int CROP_HEAD = 1002;
@@ -57,7 +61,7 @@ public class ShowPicActivity extends AppCompatActivity implements ShowPicView {
 
     private ShowPicAdapter mShowPicAdapter;
 
-    private List<AllPicInfo> mAllPicInfos = new ArrayList<>();
+    private List<PicInAlbumBean> mAllPicInfos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +76,7 @@ public class ShowPicActivity extends AppCompatActivity implements ShowPicView {
 
     private void init() {
         getIntentFromAlbumAdapter();
-        mShowPicPresenter = new ShowPicPresenterImpl(this);
+        mShowPicPresenter = new PicInAlbumPresenterImpl(this);
 
         mShowPicPresenter.getList(mAblumName.getText().toString());
         initSwipeRefreshLayout();
@@ -169,11 +173,21 @@ public class ShowPicActivity extends AppCompatActivity implements ShowPicView {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, GET_HEAD_IMG);
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+//        if(data.getData() == null){
+//            Toast.makeText(this, "你还没选中图片", Toast.LENGTH_SHORT).show();
+//            //存在如果没有选择图片就会崩溃的bug。
+//            return;
+//        }
+
+
         if (requestCode == GET_HEAD_IMG) {
+
             Uri imgUri = data.getData();
 
 
@@ -218,10 +232,11 @@ public class ShowPicActivity extends AppCompatActivity implements ShowPicView {
     @Override
     public void saveAllPicInfoSuccess() {
         Toast.makeText(this, "保存AllPicInfo成功", Toast.LENGTH_SHORT).show();
+        EventBus.getDefault().post(new EventWithPhotoFragment("EventWithPhotoFragment"));
     }
 
     @Override
-    public void getAllPicInfoListSuccess(ArrayList<AllPicInfo> arr) {
+    public void getAllPicInfoListSuccess(ArrayList<PicInAlbumBean> arr) {
 
         updateAlbum(objectId, arr);
 
@@ -233,7 +248,7 @@ public class ShowPicActivity extends AppCompatActivity implements ShowPicView {
 
 
     @Override
-    public void getListSuccess(ArrayList<AllPicInfo> arr) {
+    public void getListSuccess(ArrayList<PicInAlbumBean> arr) {
 
         updateAlbum(objectId, arr);
 
@@ -258,10 +273,10 @@ public class ShowPicActivity extends AppCompatActivity implements ShowPicView {
     }
 
 
-    private void updateAlbum(String objectId, ArrayList<AllPicInfo> arr) {
-        //        ImageItemViewInfo
+    private void updateAlbum(String objectId, ArrayList<PicInAlbumBean> arr) {
+        //        AlbumBean
 
-        ImageItemViewInfo mImageItemViewInfo = new ImageItemViewInfo();
+        AlbumBean mImageItemViewInfo = new AlbumBean();
 
         mImageItemViewInfo.setShow_first_image(arr.get(0).getPic());
         mImageItemViewInfo.setQuantity(String.valueOf(arr.size()));

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="vote_kind">
+        <item>单选</item>
+        <item>双选</item>
+        <item>无限制</item>
+    </string-array>
+</resources>
