@@ -115,6 +115,7 @@ public class MainFileFragment extends Fragment implements MainFileView {
         //Bundle b1 =new Bundle();
         //b1.putString("key","ChildOneFragment");
         //c1.setArguments(b1);
+
         mChildFragments.add(c1);
         mStrings.add("文档");
 
