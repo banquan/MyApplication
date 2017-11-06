@@ -1,5 +1,6 @@
 package lgj.example.com.biyesheji.ui.fragment;
 
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,8 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
-import com.daimajia.numberprogressbar.NumberProgressBar;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -52,7 +51,9 @@ public class MainFileFragment extends Fragment implements MainFileView {
     private String mPath;
     private String fileSize = null;
     private String mName;
-    private NumberProgressBar mNumberProgressBar;
+//    private NumberProgressBar mNumberProgressBar;
+
+    private ProgressDialog mProgressBar;
 
     @Nullable
     @Override
@@ -68,14 +69,25 @@ public class MainFileFragment extends Fragment implements MainFileView {
 
 
         //设置进入条
-        mNumberProgressBar = (NumberProgressBar) mView.findViewById(R.id.number_progress_bar);
-        mNumberProgressBar.setProgress(0);
+//        mNumberProgressBar = (NumberProgressBar) mView.findViewById(R.id.number_progress_bar);
+//        mNumberProgressBar.setProgress(0);
 
         //点击事件上传文件
         mButton = (Button) mView.findViewById(R.id.btn_upload);
         initViews();
 
+        //初始化对话框
+        initProgressBar();
+
         return mView;
+    }
+
+    private void initProgressBar() {
+        //mProgressBar.setProgress(0);
+        mProgressBar = new ProgressDialog(getContext());
+        mProgressBar.setTitle("This is ProgressDialog");
+        mProgressBar.setMessage("Loading...");
+        mProgressBar.setCancelable(true);
     }
 
     @Override
@@ -143,31 +155,36 @@ public class MainFileFragment extends Fragment implements MainFileView {
         Toast.makeText(getContext(), "测试mvp", Toast.LENGTH_SHORT).show();
     }
 
+
+
+    @Override
+    public void uploadblockSuccess(Integer value) {
+//        mNumberProgressBar.setVisibility(View.VISIBLE);
+        if (value == 100) {
+//            mNumberProgressBar.setVisibility(View.GONE);
+            Toast.makeText(getContext(), "uploadblockSuccess()", Toast.LENGTH_SHORT).show();
+        }
+//        mNumberProgressBar.setProgress(value);
+
+        mProgressBar.show();
+    }
+
+
     @Override
     public void saveDocumentSuccess() {
         Toast.makeText(getContext(), "saveDocumentSuccess()", Toast.LENGTH_SHORT).show();
 
         EventBus.getDefault().post(
                 new Event("refreshDoucument"));
+        mProgressBar.dismiss();
     }
-
-    @Override
-    public void uploadblockSuccess(Integer value) {
-        mNumberProgressBar.setVisibility(View.VISIBLE);
-        if (value == 100) {
-            mNumberProgressBar.setVisibility(View.GONE);
-            Toast.makeText(getContext(), "uploadblockSuccess()", Toast.LENGTH_SHORT).show();
-        }
-        mNumberProgressBar.setProgress(value);
-
-    }
-
 
     @Override
     public void saveVideoSuccess() {
         Toast.makeText(getContext(), "saveVideoSuccess()", Toast.LENGTH_SHORT).show();
         EventBus.getDefault().post(
                 new Event("refreshVideo"));
+        mProgressBar.dismiss();
     }
 
 
@@ -177,6 +194,7 @@ public class MainFileFragment extends Fragment implements MainFileView {
         Toast.makeText(getContext(), "savePictureSuccess()", Toast.LENGTH_SHORT).show();
         EventBus.getDefault().post(
                 new Event("refreshPicture"));
+        mProgressBar.dismiss();
     }
 
     @Override
@@ -184,6 +202,7 @@ public class MainFileFragment extends Fragment implements MainFileView {
         Toast.makeText(getContext(), "saveMusicSuccess()", Toast.LENGTH_SHORT).show();
         EventBus.getDefault().post(
                 new Event("refreshMusic"));
+        mProgressBar.dismiss();
     }
 
 
@@ -193,6 +212,7 @@ public class MainFileFragment extends Fragment implements MainFileView {
         Toast.makeText(getContext(), "saveOtherSuccess()", Toast.LENGTH_SHORT).show();
         EventBus.getDefault().post(
                 new Event("refreshSuccess"));
+        mProgressBar.dismiss();
     }
 
 

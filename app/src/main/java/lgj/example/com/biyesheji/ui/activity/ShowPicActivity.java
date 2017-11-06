@@ -1,5 +1,6 @@
 package lgj.example.com.biyesheji.ui.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -12,12 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.daimajia.numberprogressbar.NumberProgressBar;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -48,8 +46,8 @@ public class ShowPicActivity extends AppCompatActivity implements PicInAlbumView
     RecyclerView mRecyclerView;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
-    @BindView(R.id.number_progress_bar)
-    NumberProgressBar mProgressBar;
+//    @BindView(R.id.number_progress_bar)
+//    ProgressDialog mProgressBar;
     private String objectId;
     private String title;
 
@@ -63,11 +61,14 @@ public class ShowPicActivity extends AppCompatActivity implements PicInAlbumView
 
     private List<PicInAlbumBean> mAllPicInfos = new ArrayList<>();
 
+    private ProgressDialog mProgressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_pic);
         ButterKnife.bind(this);
+
 
         init();
 
@@ -84,7 +85,11 @@ public class ShowPicActivity extends AppCompatActivity implements PicInAlbumView
     }
 
     private void initProgressBar() {
-        mProgressBar.setProgress(0);
+        //mProgressBar.setProgress(0);
+        mProgressBar = new ProgressDialog(ShowPicActivity.this);
+        mProgressBar.setTitle("This is ProgressDialog");
+        mProgressBar.setMessage("Loading...");
+        mProgressBar.setCancelable(true);
     }
 
 
@@ -226,11 +231,15 @@ public class ShowPicActivity extends AppCompatActivity implements PicInAlbumView
 
     @Override
     public void uploadPicSuccess() {
+        //保存成功的时候让消息提示框
+        Log.e("mProgressBar","关闭mProgressBar");
+        mProgressBar.dismiss();
         Toast.makeText(this, "上传图片成功", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void saveAllPicInfoSuccess() {
+
         Toast.makeText(this, "保存AllPicInfo成功", Toast.LENGTH_SHORT).show();
         EventBus.getDefault().post(new EventWithPhotoFragment("EventWithPhotoFragment"));
     }
@@ -261,15 +270,17 @@ public class ShowPicActivity extends AppCompatActivity implements PicInAlbumView
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void uploadPicProgress(Integer value) {
-        if (value == 100) {
-            mProgressBar.setVisibility(View.GONE);
+        if (value >= 100) {
+//            mProgressBar.dismiss();
         }
-        mProgressBar.setProgress(value);
+
+        mProgressBar.show();
+
     }
 
     @Override
     public void showProgressBar() {
-        mProgressBar.setVisibility(View.VISIBLE);
+        //mProgressBar.setVisibility(View.VISIBLE);
     }
 
 
