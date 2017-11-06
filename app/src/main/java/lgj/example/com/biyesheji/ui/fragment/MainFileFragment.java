@@ -177,6 +177,7 @@ public class MainFileFragment extends Fragment implements MainFileView {
         EventBus.getDefault().post(
                 new Event("refreshDoucument"));
         mProgressBar.dismiss();
+
     }
 
     @Override
